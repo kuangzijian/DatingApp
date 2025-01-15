@@ -486,3 +486,5 @@ API/appsettings.json
 .vscode/settings.json
 .vscode/launch.json
 .vscode/settings.json
+API/dating.db-shm
+API/dating.db-wal
