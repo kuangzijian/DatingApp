@@ -13,7 +13,7 @@ import { HomeComponent } from "./home/home.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  private  accountService = inject(AccountService);
+  private accountService = inject(AccountService);
 
   ngOnInit(): void {
     this.SetCurrentUser();
