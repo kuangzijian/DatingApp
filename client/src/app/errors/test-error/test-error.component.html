@@ -1,0 +1,23 @@
+<div>
+    <h1>Test Error</h1>
+    <p>This is a test error page</p>
+    <button mat-raised-button color="primary" (click)="get400error()">get400error</button>
+    <button mat-raised-button color="primary" (click)="get401error()">get401error</button>
+    <button mat-raised-button color="primary" (click)="get404error()">get404error</button>
+    <button mat-raised-button color="primary" (click)="get500error()">get500error</button>
+    <button mat-raised-button color="primary" (click)="get400Validationerror()">get400Validationerror</button>
+
+    @if(validationErrors.length>0)
+    {
+        <div class="row mt-5">
+            <h4>Validation Errors</h4>
+            <ul>
+                @for (error of validationErrors; track $index){
+                    <li>{{error}}</li>
+                }
+                
+            </ul>
+        </div>
+
+    }
+</div>
