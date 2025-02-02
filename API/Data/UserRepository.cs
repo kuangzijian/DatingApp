@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
@@ -54,4 +55,10 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     {
         context.Entry(user).State = EntityState.Modified;
     }
+    
+    public async Task<bool> UpdateMember(MemberUpdateDto memberUpdateDto, AppUser user){
+        mapper.Map(memberUpdateDto, user);
+        Update(user);
+        return await context.SaveChangesAsync() > 0;
+    } 
 }
