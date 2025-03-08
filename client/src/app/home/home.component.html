@@ -1,13 +1,14 @@
 <div class="container mt-5">
     <div style="text-align: center;">
-        @if (!registerMode){
+        <ng-container *ngIf="!registerMode; else registerTemplate">
             <h1>OnlyLoves</h1>
-            <p class = "lead">Join in to discover and share what you love! All you need to do is sign up!</p>
+            <p class="lead">Join in to discover and share what you love! All you need to do is sign up!</p>
             <div class="text-center">
                 <button class="btn btn-primary btn-lg me-2" (click)="registerToggle()">Register</button>
                 <button class="btn btn-info btn-lg me-2">Learn more</button>
             </div>
-        } @else {
+        </ng-container>
+        <ng-template #registerTemplate>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-4">
@@ -15,6 +16,6 @@
                     </div>
                 </div>
             </div>
-        }     
+        </ng-template>
     </div>
 </div>
