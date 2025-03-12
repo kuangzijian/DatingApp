@@ -18,6 +18,7 @@ public class UsersController(IUserRepository userRepository, IPhotoService photo
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
     {
+        userParams.CurrentUserName = User.GetUsername();
         var users = await userRepository.GetMembersAsync(userParams);
 
         Response.AddPaginationHeader(users);
