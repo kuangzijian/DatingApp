@@ -15,7 +15,7 @@ public class AppUser
 
     public DateTime Created { get; set; } = DateTime.UtcNow;
 
-    public DateTime lastActive { get; set; } = DateTime.UtcNow;
+    public DateTime LastActive { get; set; } = DateTime.UtcNow;
 
     public required string Gender { get; set; }
 
