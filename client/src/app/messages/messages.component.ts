@@ -16,7 +16,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 })
 export class MessagesComponent implements OnInit{
   messageService = inject(MesageService);
-  container = 'Inbox';
+  container = 'Unread';
   pageNumber = 1;
   pageSize = 5;
 
