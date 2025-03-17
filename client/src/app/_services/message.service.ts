@@ -8,7 +8,7 @@ import { setParginatedResponse, setParginationHeader } from './paginationHelper'
 @Injectable({
   providedIn: 'root'
 })
-export class MesageService {
+export class MessageService {
   baseUrl = environment.apiUrl;
   private http = inject(HttpClient);
   paginatedResult = signal<PaginatedResult<Message[]> | null>(null);
