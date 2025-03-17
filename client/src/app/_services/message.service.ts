@@ -22,4 +22,8 @@ export class MessageService {
         next: response => setParginatedResponse(response, this.paginatedResult)
       })
   }
+
+  getMessageThread(username: string) {
+    return this.http.get<Message[]>(this.baseUrl + 'messages/thread/' + username);
+  }
 }
