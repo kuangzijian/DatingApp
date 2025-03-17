@@ -7,17 +7,12 @@
     <button mat-raised-button color="primary" (click)="get500error()">get500error</button>
     <button mat-raised-button color="primary" (click)="get400Validationerror()">get400Validationerror</button>
 
-    @if(validationErrors.length>0)
-    {
-        <div class="row mt-5">
-            <h4>Validation Errors</h4>
-            <ul>
-                @for (error of validationErrors; track $index){
-                    <li>{{error}}</li>
-                }
-                
-            </ul>
-        </div>
-
-    }
+    <div *ngIf="validationErrors.length > 0" class="row mt-5">
+        <h4>Validation Errors</h4>
+        <ul>
+            <li *ngFor="let error of validationErrors; let i = index">
+                {{ error }}
+            </li>
+        </ul>
+    </div>
 </div>

@@ -1,4 +1,4 @@
-@if (member){
+<div *ngIf="member">
     <div class="row">
         <div class="col-4">
             <div class="card">
@@ -44,13 +44,13 @@
                     <p>{{member.interests}}</p>
                 </tab>
                 <tab heading="Photos" #photoTab="tab">
-                    @if(photoTab.active){
+                    <ng-container *ngIf="photoTab.active">
                         <gallery 
                             [items]="images" 
                             [itemAutosize]="true"
                             class="gallery">
                         </gallery>
-                    }
+                    </ng-container>
                 </tab>
                 <tab heading="Messages">
                     <p>Messages will go here</p>
@@ -58,7 +58,4 @@
             </tabset>
         </div>
     </div>
-
-    
-
-}
+</div>

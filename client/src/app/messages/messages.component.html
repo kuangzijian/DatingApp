@@ -14,9 +14,7 @@
     </div>
 </div>
 
-@if(!messageService.paginatedResult()?.items) {
-    <h3>No messages</h3>
-} @else {
+<div *ngIf="messageService.paginatedResult()?.items; else noMessages">
     <table class="table table-hover mt-3" style="cursor: pointer;">
         <thead>
             <tr>
@@ -27,44 +25,43 @@
             </tr>
         </thead>
         <tbody class="align-middle">
-            @for (message of messageService.paginatedResult()?.items; track message.id) {
-                <tr routerLink="{{getRoute(message)}}">
-                    <td>{{message.content}}</td>
-                    <td>
-                        <div>
-                            <img 
-                                [src]="container === 'Outbox' 
-                                    ? (message.recipientPhotoUrl || './assets/user.png') 
-                                    : message.senderPhotoUrl || './assets/user.png'" 
-                                alt="image of user"
-                                class="rounded-circle me-2"
-                            >
-                            <strong>{{container === 'Outbox' 
-                                ? message.recipientUsername : message.senderUsername}}</strong>
-                        </div>
-                    </td>
-                    <td>{{message.messageSent | timeago}}</td>
-                    <td><button class="btn btn-danger">Delete</button></td>
-                </tr>
-            }
+            <tr *ngFor="let message of messageService.paginatedResult()?.items" routerLink="{{getRoute(message)}}">
+                <td>{{message.content}}</td>
+                <td>
+                    <div>
+                        <img 
+                            [src]="container === 'Outbox' 
+                                ? (message.recipientPhotoUrl || './assets/user.png') 
+                                : message.senderPhotoUrl || './assets/user.png'" 
+                            alt="image of user"
+                            class="rounded-circle me-2"
+                        >
+                        <strong>{{container === 'Outbox' 
+                            ? message.recipientUsername : message.senderUsername}}</strong>
+                    </div>
+                </td>
+                <td>{{message.messageSent | timeago}}</td>
+                <td><button class="btn btn-danger">Delete</button></td>
+            </tr>
         </tbody>
     </table>
-}
+</div>
 
+<ng-template #noMessages>
+    <h3>No messages</h3>
+</ng-template>
 
-@if (messageService.paginatedResult()?.pagination) {
-    <div class = "d-flex justify-content-center">
-        <pagination 
-            [boundaryLinks]="true" 
-            [totalItems]="messageService.paginatedResult()?.pagination!.totalItems"    
-            [itemsPerPage]="messageService.paginatedResult()?.pagination!.itemsPerPage"
-            (pageChanged)="pageChanged($event)"
-            [(ngModel)]="messageService.paginatedResult()?.pagination!.currentPage"
-            [maxSize]="10"
-            previousText="&lsaquo;" 
-            nextText="&rsaquo;" 
-            firstText="&laquo;" 
-            lastText="&raquo;">
-        </pagination>
-    </div>
-}
+<div *ngIf="messageService.paginatedResult()?.pagination" class="d-flex justify-content-center">
+    <pagination 
+        [boundaryLinks]="true" 
+        [totalItems]="messageService.paginatedResult()?.pagination!.totalItems"    
+        [itemsPerPage]="messageService.paginatedResult()?.pagination!.itemsPerPage"
+        (pageChanged)="pageChanged($event)"
+        [(ngModel)]="messageService.paginatedResult()?.pagination!.currentPage"
+        [maxSize]="10"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;">
+    </pagination>
+</div>

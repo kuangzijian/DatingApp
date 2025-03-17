@@ -20,7 +20,7 @@ export class MembersService {
   //members = signal<Member[]>([]);
   paginatedResult = signal<PaginatedResult<Member[]> | null>(null);
   memberCache = new Map();
-  user = this.accountService.curentUser();
+  user = this.accountService.currentUser();
   userParams = signal<UserParams>(new UserParams(this.user));
 
   resetUserParams() {

@@ -1,6 +1,6 @@
 import { Component, inject, input, OnInit, output } from '@angular/core';
 import { Member } from '../../_models/member';
-import { DecimalPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
+import { CommonModule, DecimalPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { AccountService } from '../../_services/account.service';
 import { environment } from '../../../environments/environment';
@@ -10,7 +10,7 @@ import { MembersService } from '../../_services/members.service';
 @Component({
   selector: 'app-photo-editor',
   standalone: true,
-  imports: [NgIf, NgFor, NgStyle, NgClass, FileUploadModule, DecimalPipe],
+  imports: [NgIf, NgFor, NgStyle, NgClass, FileUploadModule, DecimalPipe, CommonModule],
   templateUrl: './photo-editor.component.html',
   styleUrl: './photo-editor.component.css'
 })
@@ -44,7 +44,7 @@ export class PhotoEditorComponent implements OnInit{
   setMainPhoto(photo: Photo){
     this.memberService.setMainPhoto(photo).subscribe({
       next: _=>{
-        const user = this.accountService.curentUser();
+        const user = this.accountService.currentUser();
         if (user) {
           user.photoUrl = photo.url;
           this.accountService.setCurrentUser(user)
@@ -62,7 +62,7 @@ export class PhotoEditorComponent implements OnInit{
   initializeUplaoder(){
     this.uploader = new FileUploader({
       url: this.baseUrl + 'users/add-photo',
-      authToken: 'Bearer ' + this.accountService.curentUser()?.token,
+      authToken: 'Bearer ' + this.accountService.currentUser()?.token,
       allowedFileType:['image'],
       removeAfterUpload: true,
       autoUpload: false,
@@ -79,7 +79,7 @@ export class PhotoEditorComponent implements OnInit{
       updatedMember.photos.push(photo);
       this.memberChange.emit(updatedMember);
       if (photo.isMain){
-        const user = this.accountService.curentUser();
+        const user = this.accountService.currentUser();
         if (user){
           user.photoUrl = photo.url;
           this.accountService.setCurrentUser(user);

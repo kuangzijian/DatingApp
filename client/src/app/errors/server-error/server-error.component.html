@@ -1,6 +1,6 @@
 <h4>500 Internal Server Error</h4>
-@if (error) {
+<div *ngIf="error">
     <h5 class="text-danger">Error: {{error.message}}</h5>
     <button class="btn btn-info btn-lg" routerLink="/">Return to home page</button>
     <code class="mt-5" style="background-color: whitesmoe; display: block; padding: 10px;">{{error.details}}</code>
-}
+</div>

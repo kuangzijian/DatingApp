@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-test-error',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './test-error.component.html',
   styleUrl: './test-error.component.css'
 })

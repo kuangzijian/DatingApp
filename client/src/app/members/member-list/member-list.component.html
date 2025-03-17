@@ -1,10 +1,10 @@
 <div class="row">
 
-     <div class="text-center mt-3">
+    <div class="text-center mt-3">
         <h2>Your matches - {{memberService.paginatedResult()?.pagination?.totalItems}}</h2>
-     </div>
+    </div>
 
-     <div class="container mt-3">
+    <div class="container mt-3">
         <form #form="ngForm" class="d-flex mb-3" (ngSubmit)="loadMembers()">
             <div class="d-flex mx-2">
                 <label class="col-form-label"> Age from: </label>
@@ -28,11 +28,9 @@
                     name="gender" 
                     [(ngModel)]="memberService.userParams().gender"
                 >
-                    @for (gender of genderList; track gender.value){
-                        <option [value]="gender.value">
-                            {{gender.display}}
-                        </option>
-                    }
+                    <option *ngFor="let gender of genderList" [value]="gender.value">
+                        {{gender.display}}
+                    </option>
                 </select>
             </div>
 
@@ -52,28 +50,26 @@
                 </div>
             </div>
         </form>
-     </div>
+    </div>
 
-    @for (member of memberService.paginatedResult()?.items; track member.id) {
-        <div class="col-2">
+    <div class="row mt-3">
+        <div *ngFor="let member of memberService.paginatedResult()?.items" class="col-2">
             <app-member-card [member]="member"></app-member-card>
         </div>
-    }
+    </div>
 </div>
 
-@if (memberService.paginatedResult()?.pagination) {
-    <div class = "d-flex justify-content-center">
-        <pagination 
-            [boundaryLinks]="true" 
-            [totalItems]="memberService.paginatedResult()?.pagination!.totalItems"    
-            [itemsPerPage]="memberService.paginatedResult()?.pagination!.itemsPerPage"
-            (pageChanged)="pageChanged($event)"
-            [(ngModel)]="memberService.paginatedResult()?.pagination!.currentPage"
-            [maxSize]="10"
-            previousText="&lsaquo;" 
-            nextText="&rsaquo;" 
-            firstText="&laquo;" 
-            lastText="&raquo;">
-        </pagination>
-    </div>
-}
+<div *ngIf="memberService.paginatedResult()?.pagination" class="d-flex justify-content-center">
+    <pagination 
+        [boundaryLinks]="true" 
+        [totalItems]="memberService.paginatedResult()?.pagination!.totalItems"    
+        [itemsPerPage]="memberService.paginatedResult()?.pagination!.itemsPerPage"
+        (pageChanged)="pageChanged($event)"
+        [(ngModel)]="memberService.paginatedResult()?.pagination!.currentPage"
+        [maxSize]="10"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;">
+    </pagination>
+</div>

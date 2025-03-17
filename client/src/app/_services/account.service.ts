@@ -13,7 +13,7 @@ export class AccountService {
   private likeService = inject(LikesService);
   baseUrl = environment.apiUrl;
 
-  curentUser = signal<User | null>(null);
+  currentUser = signal<User | null>(null);
 
   login(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
@@ -40,11 +40,11 @@ export class AccountService {
   setCurrentUser(user: User)
   {
     localStorage.setItem('user', JSON.stringify(user));
-    this.curentUser.set(user);
+    this.currentUser.set(user);
     this.likeService.getLikeIds();
   }
   logout() {
     localStorage.removeItem('user');
-    this.curentUser.set(null);
+    this.currentUser.set(null);
   }
 }
