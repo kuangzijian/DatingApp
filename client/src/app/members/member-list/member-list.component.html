@@ -1,44 +1,42 @@
 <div class="row">
-
-    <div class="text-center mt-3">
+    <div class="text-center">
         <h2>Your matches - {{memberService.paginatedResult()?.pagination?.totalItems}}</h2>
     </div>
 
-    <div class="container mt-3">
-        <form #form="ngForm" class="d-flex mb-3" (ngSubmit)="loadMembers()">
-            <div class="d-flex mx-2">
-                <label class="col-form-label"> Age from: </label>
-                <input type="number" 
-                    class="form-control ms-1" 
-                    style ="width: 100px;" 
-                    name="minAge" 
-                    [(ngModel)]="memberService.userParams().minAge" />
+    <div class="container">
+        <form #form="ngForm" class="filter-form" (ngSubmit)="loadMembers()">
+            <div class="d-flex align-items-end gap-2">
+                <div class="form-group">
+                    <label class="form-label">Age from:</label>
+                    <input type="number" 
+                        class="form-control" 
+                        name="minAge" 
+                        [(ngModel)]="memberService.userParams().minAge" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Age to:</label>
+                    <input type="number" 
+                        class="form-control" 
+                        name="maxAge" 
+                        [(ngModel)]="memberService.userParams().maxAge" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Show:</label>
+                    <select class="form-select" 
+                        name="gender" 
+                        [(ngModel)]="memberService.userParams().gender">
+                        <option *ngFor="let gender of genderList" [value]="gender.value">
+                            {{gender.display}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group d-flex gap-2">
+                    <button class="btn btn-primary" type="submit">Apply</button>
+                    <button (click)="resetFilters()" class="btn btn-secondary" type="button">Reset</button>
+                </div>
             </div>
-            <div class="d-flex mx-2">
-                <label class="col-form-label"> Age to: </label>
-                <input type="number" 
-                    class="form-control ms-1" 
-                    style ="width: 100px;" 
-                    name="maxAge" 
-                    [(ngModel)]="memberService.userParams().maxAge" />
-            </div>
-            <div class="d-flex mx-2">
-                <label class="col-form-label"> Show: </label>
-                <select class="form-select ms-1" style="width: 180px" 
-                    name="gender" 
-                    [(ngModel)]="memberService.userParams().gender"
-                >
-                    <option *ngFor="let gender of genderList" [value]="gender.value">
-                        {{gender.display}}
-                    </option>
-                </select>
-            </div>
-
-            <button class="btn btn-primary ms-1" type="submit">Apply filters</button>
-            <button (click)="resetFilters()" class="btn btn-primary ms-1" type="submit">Reset filters</button>
-
-            <div class="col">
-                <div class="btn-group float-end">
+            <div class="order-buttons">
+                <div class="btn-group">
                     <button 
                         type="button" class="btn btn-primary" name="orderBy" 
                         (click)="loadMembers()" btnRadio="lastActive" 
@@ -52,14 +50,15 @@
         </form>
     </div>
 
-    <div class="row mt-3">
-        <div *ngFor="let member of memberService.paginatedResult()?.items" class="col-2">
+    <div class="row g-4 mt-3">
+        <div *ngFor="let member of memberService.paginatedResult()?.items" 
+             class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
             <app-member-card [member]="member"></app-member-card>
         </div>
     </div>
 </div>
 
-<div *ngIf="memberService.paginatedResult()?.pagination" class="d-flex justify-content-center">
+<div *ngIf="memberService.paginatedResult()?.pagination" class="d-flex justify-content-center mt-4">
     <pagination 
         [boundaryLinks]="true" 
         [totalItems]="memberService.paginatedResult()?.pagination!.totalItems"    
