@@ -14,7 +14,11 @@
     </div>
 </div>
 
-<div *ngIf="messageService.paginatedResult()?.items; else noMessages">
+<div *ngIf="!(messageService.paginatedResult()?.items?.length)">
+    <h3 class="mt-3">No messages</h3>
+</div>
+
+<div *ngIf="messageService.paginatedResult()?.items?.length ?? 0 > 0">
     <table class="table table-hover mt-3" style="cursor: pointer;">
         <thead>
             <tr>
@@ -25,18 +29,20 @@
             </tr>
         </thead>
         <tbody class="align-middle">
-            <tr *ngFor="let message of messageService.paginatedResult()?.items" routerLink="{{getRoute(message)}}">
+            <tr *ngFor="let message of messageService.paginatedResult()?.items" 
+                routerLink="{{getRoute(message)}}"
+                [queryParams]="{tab: 'Messages'}">
                 <td>{{message.content}}</td>
                 <td>
                     <div>
                         <img 
-                            [src]="container === 'Outbox' 
+                            [src]="isOutbox 
                                 ? (message.recipientPhotoUrl || './assets/user.png') 
                                 : message.senderPhotoUrl || './assets/user.png'" 
                             alt="image of user"
                             class="rounded-circle me-2"
                         >
-                        <strong>{{container === 'Outbox' 
+                        <strong>{{isOutbox 
                             ? message.recipientUsername : message.senderUsername}}</strong>
                     </div>
                 </td>
@@ -47,11 +53,10 @@
     </table>
 </div>
 
-<ng-template #noMessages>
-    <h3>No messages</h3>
-</ng-template>
 
-<div *ngIf="messageService.paginatedResult()?.pagination" class="d-flex justify-content-center">
+
+<div *ngIf="messageService.paginatedResult()?.pagination?.totalItems ?? 0 > 0"
+    class="d-flex justify-content-center">
     <pagination 
         [boundaryLinks]="true" 
         [totalItems]="messageService.paginatedResult()?.pagination!.totalItems"    
