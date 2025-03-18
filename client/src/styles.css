@@ -400,10 +400,10 @@
   }
   
   .filter-form .form-label {
-    margin-bottom: 0.25rem;
+    color: #fff;
+    font-size: 1.1rem;
     font-weight: 500;
-    color: #495057;
-    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
   }
   
   .filter-form .form-control, 
@@ -479,8 +479,7 @@
     }
     
     .filter-form .form-label {
-        font-size: 0.7rem;
-        margin-bottom: 0.15rem;
+        font-size: 1rem;
     }
     
     .filter-form .form-control, 
