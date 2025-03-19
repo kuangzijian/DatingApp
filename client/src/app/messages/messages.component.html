@@ -36,13 +36,13 @@
                 <td>
                     <div>
                         <img 
-                            [src]="isOutbox 
+                            [src]="accountService.currentUser()?.username === message.senderUsername 
                                 ? (message.recipientPhotoUrl || './assets/user.png') 
-                                : message.senderPhotoUrl || './assets/user.png'" 
+                                : (message.senderPhotoUrl || './assets/user.png')" 
                             alt="image of user"
                             class="rounded-circle me-2"
                         >
-                        <strong>{{isOutbox 
+                        <strong>{{accountService.currentUser()?.username === message.senderUsername 
                             ? message.recipientUsername : message.senderUsername}}</strong>
                     </div>
                 </td>

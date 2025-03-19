@@ -7,6 +7,7 @@ import { Message } from '../_models/message';
 import { RouterLink } from '@angular/router';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CommonModule } from '@angular/common';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-messages',
@@ -20,7 +21,7 @@ export class MessagesComponent implements OnInit{
   container = 'Unread';
   pageNumber = 1;
   pageSize = 5;
-  isOutbox = this.container === 'Outbox';
+  accountService = inject(AccountService);
 
   ngOnInit(): void {
     this.loadMessages();
