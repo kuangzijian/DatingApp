@@ -740,3 +740,25 @@
     padding: 0;
   }
   
+  .member-tabset > .nav-tabs > .nav-item > .nav-link {
+    border: none;
+    color: #495057;
+  }
+  
+  .member-tabset > .nav-tabs > .nav-item.active > .nav-link {
+    border: none !important;
+    border-bottom: 4px solid #E95420 !important;
+    color: #E95420;
+  }
+  
+  .member-tabset > .nav-tabs > .nav-item:hover > .nav-link {
+    border: none;
+    color: #E95420;
+  }
+  
+  .member-tabset > .tab-content {
+    margin-top: -3px;
+    border: 0;
+    padding: 15px 0;
+  }
+  

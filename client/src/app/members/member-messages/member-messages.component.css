@@ -46,7 +46,7 @@
 }
 
 .text-muted {
-    color: #6c757d !important;
+    color: #212529 !important;
     font-size: 0.85rem;
 }
 
@@ -66,6 +66,12 @@
     border-radius: 20px 0 0 20px;
     padding: 0.5rem 1rem;
     font-size: 0.95rem;
+    color: #212529;
+}
+
+.input-group .form-control::placeholder {
+    color: #212529;
+    opacity: 0.8;
 }
 
 .input-group .btn {
