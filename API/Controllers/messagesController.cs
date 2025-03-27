@@ -24,7 +24,7 @@ public class MessagesController(IMessageRepository messageRepository,
         var sender = await userRepository.GetUserByUsernameAsync(username);
         var recipient = await userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
 
-        if (recipient == null || sender == null) return BadRequest("User not found");
+        if (recipient == null || sender == null || sender.UserName == null || recipient.UserName == null) return BadRequest("User not found");
 
         var message = new Message
         {

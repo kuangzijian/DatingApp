@@ -14,6 +14,8 @@ public class TokenService(IConfiguration config) : ITokenService
         var tokenKey = config["TokenKey"] ?? throw new ArgumentNullException("TokenKey is missing from appsettings.json");
         if (tokenKey.Length < 64) throw new ArgumentException("TokenKey must be at least 64 characters long");
         var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(tokenKey));
+
+        if (user.UserName == null) throw new ArgumentNullException("UserName is null");
         
         var claims = new List<Claim>
         {
