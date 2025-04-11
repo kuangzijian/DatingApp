@@ -5,13 +5,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { HasRoleDirective } from '../_directives/has-role.directive';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [FormsModule, BsDropdownModule, RouterLink, RouterLinkActive, CommonModule],
+  imports: [FormsModule, BsDropdownModule, RouterLink, RouterLinkActive, CommonModule, HasRoleDirective],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })

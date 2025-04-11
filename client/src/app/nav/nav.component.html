@@ -7,17 +7,18 @@
     </button>
     
     <div class="collapse navbar-collapse" [class.show]="!isCollapsed" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" *ngIf="accountService.currentUser()">
+      <div class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!accountService.currentUser()"></div>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="accountService.currentUser()">
+        <li class="nav-item">
           <a routerLink="/members" routerLinkActive="active" class="nav-link" (click)="toggleNav()">Matches</a>
         </li>
-        <li class="nav-item" *ngIf="accountService.currentUser()">
+        <li class="nav-item">
           <a routerLink="/lists" routerLinkActive="active" class="nav-link" (click)="toggleNav()">Lists</a>
         </li>
-        <li class="nav-item" *ngIf="accountService.currentUser()">
+        <li class="nav-item">
           <a routerLink="/messages" routerLinkActive="active" class="nav-link" (click)="toggleNav()">Messages</a>
         </li>
-        <li class="nav-item" *ngIf="accountService.currentUser()">
+        <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
           <a routerLink="/admin" routerLinkActive="active" class="nav-link" (click)="toggleNav()">Admin</a>
         </li>
       </ul>   
